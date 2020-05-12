@@ -1,9 +1,12 @@
-import csv
+import numpy as np
 import pandas as pd
 from IPython.display import display
 
 
 def load_data():
+    pd.set_option('display.max_columns', None)
+    pd.set_option("max_rows", 30)
+
     df = pd.read_csv('data/testset.csv', sep=';', engine='python')
 
     df = df.drop(columns=['prob_REF', 'prediction', 'Unnamed: 0', 'Data valutazione pratica'])
@@ -13,8 +16,8 @@ def load_data():
     df.columns = ['rischio totale', 'domanda finanziamento', 'outstanding',
                   'totale finanziato gruppo', 'totale finanziato',
                   'rating bplg', 'rating bnp',
-                  'Assilea', 'canale di apporto', 'cliente anni',
-                  'gruppo cliente anni', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'Z17',
+                  'assilea', 'cerved', 'nuovo cliente',
+                  'nuovo gruppo', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'Z17',
                   'BLS', 'ELS', 'RD', 'TS', 'Cessione Contratto Mandatata',
                   'Cessione Contratto Semplice', 'Credito',
                   'Enveloppe loc, opérations Spé', 'Enveloppe location Transfert',
@@ -26,8 +29,8 @@ def load_data():
     df = df.reindex(columns=['codice', 'rischio totale', 'domanda finanziamento', 'outstanding',
                         'totale finanziato gruppo', 'totale finanziato',
                         'rating bplg', 'rating bnp',
-                        'Assilea', 'canale di apporto', 'cliente anni',
-                        'gruppo cliente anni', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'Z17',
+                        'assilea', 'cerved', 'nuovo cliente',
+                        'nuovo gruppo', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'Z17',
                         'BLS', 'ELS', 'RD', 'TS', 'Cessione Contratto Mandatata',
                         'Cessione Contratto Semplice', 'Credito',
                         'Enveloppe loc, opérations Spé', 'Enveloppe location Transfert',
@@ -44,4 +47,7 @@ def load_data():
 
 def clean_data(df):
     df = df.drop(columns=['codice', 'prob'])
+    df['rating bplg'].replace(to_replace={0: np.nan}, inplace=True)
+    df['nuovo cliente'] = df['nuovo cliente'].notnull().astype('int')
+    df['nuovo gruppo'] = df['nuovo gruppo'].notnull().astype('int')
     return df
