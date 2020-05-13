@@ -1,9 +1,7 @@
 from script import load_data
 from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-from sklearn.utils import shuffle
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 
 def Sort(sub_li):
@@ -15,6 +13,8 @@ def Sort(sub_li):
 
 df = load_data.load_data()
 df.fillna(0, inplace=True)
+df = shuffle(df).reset_index(drop=True)
+df = df.truncate(before=0, after=10000)
 
 Y = df['target'].tolist()
 df1 = df.drop(['target'],axis=1)

@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score
 df = load_data.load_data()
 df.fillna(0, inplace=True)
 df = shuffle(df).reset_index(drop=True)
-#df = df.truncate(before=0, after=10000)
+df = df.truncate(before=0, after=300)
 
 Y = df['target'].tolist()
 df = df.drop(['target'],axis=1)
