@@ -14,7 +14,7 @@ def Sort(sub_li):
 df = load_data.load_data()
 df.fillna(0, inplace=True)
 df = shuffle(df).reset_index(drop=True)
-df = df.truncate(before=0, after=10000)
+df = df.truncate(before=0, after=300)
 
 Y = df['target'].tolist()
 df1 = df.drop(['target'],axis=1)

@@ -16,7 +16,7 @@ X = df.values.tolist()
 
 X, Y = shuffle(X,Y)
 
-x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size=0.9)
+x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size=0.8)
 
 x_train = np.array(x_train)
 y_train = np.array(y_train)
