@@ -1,5 +1,6 @@
-import numpy as np
+import csv
 import pandas as pd
+import numpy as np
 from IPython.display import display
 
 
@@ -7,7 +8,7 @@ def load_data():
     pd.set_option('display.max_columns', None)
     pd.set_option("max_rows", 30)
 
-    df = pd.read_csv('data/testset.csv', sep=';', engine='python')
+    df = pd.read_csv('../data/testset.csv', sep=';', engine='python')
 
     df = df.drop(columns=['prob_REF', 'prediction', 'Unnamed: 0', 'Data valutazione pratica'])
 
@@ -42,7 +43,7 @@ def load_data():
     df['target'].replace(to_replace={'ACC' : 1, 'REF' : 0}, inplace=True)
 
     df = clean_data(df)
-    display(df)
+    #display(df)
     return df
 
 def clean_data(df):
