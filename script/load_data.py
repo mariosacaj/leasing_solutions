@@ -8,7 +8,7 @@ def load_data():
     pd.set_option('display.max_columns', None)
     pd.set_option("max_rows", 30)
 
-    df = pd.read_csv('../data/testset.csv', sep=';', engine='python')
+    df = pd.read_csv('data/testset.csv', sep=';', engine='python')
 
     df = df.drop(columns=['prob_REF', 'prediction', 'Unnamed: 0', 'Data valutazione pratica'])
 
